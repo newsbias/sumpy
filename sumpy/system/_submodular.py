@@ -17,9 +17,9 @@ class SubmodularMMRSummarizer(SubmodularMMRMixin, _SystemBase):
 
     def build_summary(self, input_df, ndarray_data):
         output_df = input_df[input_df["f:submodular-mmr"].isnull() == False]
-        output_df = output_df.sort(["doc id", "sent id"], ascending=True)
-        print output_df
-        print output_df['sent text'].apply(len)
+        output_df = output_df.sort_values(["doc id", "sent id"], ascending=True)
+        print(output_df)
+        print(output_df['sent text'].apply(len))
         return Summary(output_df)
 
 
@@ -36,6 +36,6 @@ class MonotoneSubmodularBasic(MonotoneSubmodularMixin, _SystemBase):
 
     def build_summary(self, input_df, ndarray_data):
         output_df = input_df[input_df["f:monotone-submod"] == 1]
-        output_df = output_df.sort(["doc id", "sent id"], ascending=True)
+        output_df = output_df.sort_values(["doc id", "sent id"], ascending=True)
         return Summary(output_df)   
 

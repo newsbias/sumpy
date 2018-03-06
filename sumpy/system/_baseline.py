@@ -12,7 +12,7 @@ class LedeSummarizer(WordTokenizerMixin, LedeMixin, _SystemBase):
         super(LedeSummarizer, self).__init__(verbose=verbose)
 
     def build_summary(self, input_df, ndarray_data):
-        output_df = input_df[input_df[u"f:lede"] == 1].sort(
+        output_df = input_df[input_df[u"f:lede"] == 1].sort_values(
             ["doc id"], ascending=True)
         return Summary(output_df)
 
@@ -25,7 +25,7 @@ class CentroidSummarizer(CentroidMixin, _SystemBase):
         super(CentroidSummarizer, self).__init__(verbose=verbose)
 
     def build_summary(self, input_df, ndarray_data):
-        output_df = input_df.sort(["f:centroid"], ascending=False)
+        output_df = input_df.sort_values(["f:centroid"], ascending=False)
         return Summary(output_df)
 
 class MMRSummarizer(MMRMixin, _SystemBase):
@@ -37,5 +37,5 @@ class MMRSummarizer(MMRMixin, _SystemBase):
         super(MMRSummarizer, self).__init__(verbose=verbose)
         
     def build_summary(self, input_df, ndarray_data):
-        output_df = input_df.sort(["f:mmr"], ascending=False)
+        output_df = input_df.sort_values(["f:mmr"], ascending=False)
         return Summary(output_df)

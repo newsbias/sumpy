@@ -62,7 +62,7 @@ class TextRankMixin(BinaryBOWMixin):
             r = np.ones((max_sents), dtype=np.float64) / max_sents
 
             converged = False
-            for n_iter in xrange(self.max_iters):
+            for n_iter in range(self.max_iters):
                 last_r = r
                 r = np.dot(M_hat, r)
 
@@ -71,9 +71,9 @@ class TextRankMixin(BinaryBOWMixin):
                     break
 
             if not converged:
-                print "warning:", 
-                print "textrank failed to converged after {} iters".format(
-                    self.max_iters)
+                print("warning:", end='')
+                print("textrank failed to converged after {} iters".format(
+                    self.max_iters))
             input_df["f:textrank"] = r
             return input_df, ndarray_data
         self._textrank = textrank
@@ -90,7 +90,7 @@ class TextRankMixin(BinaryBOWMixin):
 
         n_sents = X.shape[0]
         M = np.zeros((n_sents, n_sents), dtype=np.float64)
-        for i, j in combinations(xrange(n_sents), 2):
+        for i, j in combinations(range(n_sents), 2):
             #s_i = word_sets[i]
             #s_j = word_sets[j] 
             val = N[i,j]  #len(s_i.intersection(s_j))
@@ -140,7 +140,7 @@ class LexRankMixin(TfIdfCosineSimilarityMixin):
             r = np.ones((max_sents), dtype=np.float64) / max_sents
 
             converged = False
-            for n_iter in xrange(self.max_iters):
+            for n_iter in range(self.max_iters):
                 last_r = r
                 r = np.dot(M_hat, r)
 
@@ -149,9 +149,9 @@ class LexRankMixin(TfIdfCosineSimilarityMixin):
                     break
 
             if not converged:
-                print "warning:", 
-                print "lexrank failed to converged after {} iters".format(
-                    self.max_iters)
+                print("warning:", end='')
+                print("lexrank failed to converged after {} iters".format(
+                    self.max_iters))
             input_df["f:lexrank"] = r
             return input_df, ndarray_data
         self._lexrank = lexrank

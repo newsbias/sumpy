@@ -44,7 +44,7 @@ class ROUGE(SentenceTokenizerMixin, ROUGEWordTokenizerMixin,
         # performance.
         col_index = []
         dataframe_cols = []
-        for i in xrange(1, self._max_ngrams + 1):
+        for i in range(1, self._max_ngrams + 1):
             rouge_n = u"ROUGE-{}".format(i)
             col_index.append((rouge_n, "Recall"))
             col_index.append((rouge_n, "Prec."))
@@ -58,7 +58,7 @@ class ROUGE(SentenceTokenizerMixin, ROUGEWordTokenizerMixin,
         if self._show_per_model_results is True:
             df2['model'] = 'AVG'
             df2 = df2.reset_index().set_index(['system','model']).append(df)
-            df2 = df2.sort()
+            df2 = df2.sort_values()
         
         return df2
 
@@ -75,7 +75,7 @@ class ROUGE(SentenceTokenizerMixin, ROUGEWordTokenizerMixin,
         tokens = [word for word in tokens if is_stopword(word) is False]
         tokens = length_limiter(tokens)
 
-        for i in xrange(1, max_ngrams + 1):
+        for i in range(1, max_ngrams + 1):
             ngram_sets[i] = {}
             total = 0
             for ngram in ngrams(tokens, i):
@@ -86,7 +86,7 @@ class ROUGE(SentenceTokenizerMixin, ROUGEWordTokenizerMixin,
                       
     def compute_prf(self, sys_ngram_sets, model_ngram_sets, max_ngrams):
         scores = []
-        for i in xrange(1, max_ngrams + 1):
+        for i in range(1, max_ngrams + 1):
             intersect = 0
             for ngram, model_ngram_count in model_ngram_sets[i].items():
                 if ngram == "__TOTAL__":
@@ -97,7 +97,7 @@ class ROUGE(SentenceTokenizerMixin, ROUGEWordTokenizerMixin,
             prec = float(intersect) / sys_ngram_sets[i][u"__TOTAL__"]
 
             if intersect == 0: 
-                print "Warning: 0 {}-gram overlap".format(i)
+                print("Warning: 0 {}-gram overlap".format(i))
                 f1 = 0
             else:
                 f1 = 2 * prec * recall / (prec + recall)

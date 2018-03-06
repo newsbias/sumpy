@@ -21,7 +21,7 @@ class Summary(object):
             remaining = size
             for idx, sent in self._df.iterrows():
                 num_chars = min(len(sent["sent text"]), remaining)
-                print num_chars
+                print(num_chars)
                 summary.append(sent["sent text"][0 : num_chars])
                 remaining -= num_chars
                 if remaining < 1:

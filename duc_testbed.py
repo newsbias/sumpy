@@ -33,7 +33,6 @@ def generate_summaries(systems, docsets):
     rouge = sumpy.eval.ROUGE(max_ngrams=2, limit=100, limit_type=u"word")
     results = []
     for docset_id in docsets.keys():
-        #print docset_id
         docs = docsets[docset_id][u"docs"]
         models = docsets[docset_id][u"models"]
         sys_sums = [(system_name, unicode(sum_func(docs)))
@@ -43,7 +42,7 @@ def generate_summaries(systems, docsets):
     return pd.concat(results).groupby(level=0).mean()
 
 def main(duc_dir):
-    print u"Loading DUC document sets from:", duc_dir 
+    print("Loading DUC document sets from:", duc_dir)
     docsets = load_docsets(duc_dir)
     
     lede = lambda x: sumpy.lede(x)
@@ -51,7 +50,7 @@ def main(duc_dir):
     lexrank = lambda x: sumpy.lexrank(x)
     systems = [(u"lede", lede), (u"centroid", centroid),
                (u"lexrank", lexrank)]
-    print generate_summaries(systems, docsets)
+    print(generate_summaries(systems, docsets))
 
 if __name__ == u"__main__":
     parser = argparse.ArgumentParser()

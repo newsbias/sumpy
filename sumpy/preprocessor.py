@@ -120,7 +120,7 @@ class LengthLimiterMixin(object):
             # Shorten list to be `_limit` tokens long.
             def word_limiter(sequence):
                 if len(sequence) < self._limit:
-                    print "Warning: document is shorter than the max length" \
-                          + " limit. This can effect evaluation negatively."
+                    print("Warning: document is shorter than the max length" \
+                          + " limit. This can effect evaluation negatively.")
                 return sequence[:self._limit]
             return word_limiter

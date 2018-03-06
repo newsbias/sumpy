@@ -39,8 +39,8 @@ class _SystemBase(object):
             if node in self._annotators:
                 self._pipeline.append(self._annotators[node])
                 if self.verbose:
-                    print "{} ({}) build".format(self.__class__.__name__,
-                        self._annotators[node].name(self))
+                    print("{} ({}) build".format(self.__class__.__name__,
+                        self._annotators[node].name(self)))
                 self._annotators[node].build(self)
 
     def prepare_inputs(self, inputs, ndarray_data=None):
@@ -99,8 +99,8 @@ class _SystemBase(object):
             if run_stage:
 
                 if self.verbose:
-                    print "{} ({}) process".format(
-                        self.__class__.__name__, ann.name(self))
+                    print("{} ({}) process".format(
+                        self.__class__.__name__, ann.name(self)))
 
                 input_df, ndarray_data = ann.process(
                     self, input_df, ndarray_data)
@@ -177,5 +177,5 @@ class AverageFeatureRankerBase(
         cols = [f for f in input_df.columns.tolist() if f.startswith("f:")]
         X = input_df[cols].values
         input_df["rank"] = (X / X.max(axis=0)).mean(axis=1)
-        output_df = input_df.sort(["rank"], ascending=False)
+        output_df = input_df.sort_values(["rank"], ascending=False)
         return Summary(output_df)

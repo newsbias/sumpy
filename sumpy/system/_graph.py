@@ -16,7 +16,7 @@ class TextRankSummarizer(TextRankMixin, _SystemBase):
         super(TextRankSummarizer, self).__init__(verbose=verbose)
 
     def build_summary(self, input_df, ndarray_data):
-        output_df = input_df.sort(["f:textrank"], ascending=False)
+        output_df = input_df.sort_values(["f:textrank"], ascending=False)
         return Summary(output_df)
 
 class LexRankSummarizer(LexRankMixin, _SystemBase):
@@ -32,6 +32,6 @@ class LexRankSummarizer(LexRankMixin, _SystemBase):
         super(LexRankSummarizer, self).__init__(verbose=verbose)
 
     def build_summary(self, input_df, ndarray_data):
-        output_df = input_df.sort(["f:lexrank"], ascending=False)
+        output_df = input_df.sort_values(["f:lexrank"], ascending=False)
         return Summary(output_df)
 

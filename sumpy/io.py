@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 import re
 import pandas as pd
@@ -34,7 +36,7 @@ class FileInput(object):
                 for path in source:
                     yield path
             except TypeError:
-                print source, 'is not iterable'
+                print(source, 'is not iterable')
 
 class DucSgmlReader(FileInput):
 

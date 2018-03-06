@@ -40,7 +40,7 @@ class SentenceTokenizerMixin(_AnnotatorBase):
         if self._sentence_tokenizer is None:
             dl = nltk.downloader.Downloader()
             if dl.is_installed("punkt") is False:
-                print "Installing NLTK Punkt Sentence Tokenizer"
+                print("Installing NLTK Punkt Sentence Tokenizer")
                 dl.download("punkt")
 
             self._sentence_tokenizer = nltk.data.load(
@@ -48,7 +48,7 @@ class SentenceTokenizerMixin(_AnnotatorBase):
 
     def process(self, input_df, ndarray_data):
         def split_text(group):
-            row = group.irow(0)
+            row = group.iloc[0]
             sents = self._sentence_tokenizer(row["doc text"])
             return pd.DataFrame([{"doc id": row["doc id"], 
                                   "sent id": i, "sent text": sent}
